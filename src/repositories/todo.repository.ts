@@ -31,3 +31,7 @@ export const updateTodo = async (id: number, title: string, content: string): Pr
     await db.update(todos).set({ title, content }).where(eq(todos.id, id));
     return findTodoById(id);
 };
+
+export const deleteTodo = async (id: number): Promise<void> => {
+    await db.delete(todos).where(eq(todos.id, id));
+};

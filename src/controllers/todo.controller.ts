@@ -27,3 +27,11 @@ export const updateTodoController = async ({
 }): Promise<ApiResponse<Todo | null>> => {
     return await todoService.updateTodoService(params.id, body);
 };
+
+export const deleteTodoController = async ({
+    params,
+}: {
+    params: { id: number };
+}): Promise<ApiResponse<void>> => {
+    return await todoService.deleteTodoService(params.id);
+};

@@ -64,3 +64,17 @@ export const updateTodoService = async (id: number, request: TodoForm): Promise<
         };
     }
 };
+
+export const deleteTodoService = async (id: number): Promise<ApiResponse<void>> => {
+    try {
+        await todoRepository.deleteTodo(id);
+        return {
+            status: true,
+        };
+    } catch (error) {
+        return {
+            status: false,
+            error: error as string,
+        };
+    }
+};

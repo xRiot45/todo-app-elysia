@@ -1,6 +1,7 @@
 import Elysia from 'elysia';
 import {
     createTodoController,
+    deleteTodoController,
     findAllTodosController,
     findTodoByIdController,
     updateTodoController,
@@ -120,6 +121,22 @@ export const todoRoutes = new Elysia({ prefix: '/todos' })
                             },
                         },
                     },
+                },
+                404: {
+                    description: 'Todo tidak ditemukan',
+                },
+            },
+        },
+    })
+    .delete('/:id', deleteTodoController, {
+        params: todoParamsValidation,
+        detail: {
+            summary: 'Delete todo by id',
+            description: 'Menghapus todo berdasarkan id',
+            tags: ['Todo'],
+            responses: {
+                200: {
+                    description: 'Todo berhasil dihapus',
                 },
                 404: {
                     description: 'Todo tidak ditemukan',
