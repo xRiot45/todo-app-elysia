@@ -1,0 +1,3 @@
+#!/bin/sh
+        bun run format && bun run lint || exit 1
+        
