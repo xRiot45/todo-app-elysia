@@ -17,3 +17,13 @@ export const findTodoByIdController = async ({
 }): Promise<ApiResponse<Todo | null>> => {
     return await todoService.findTodoByIdService(params.id);
 };
+
+export const updateTodoController = async ({
+    params,
+    body,
+}: {
+    params: { id: number };
+    body: TodoForm;
+}): Promise<ApiResponse<Todo | null>> => {
+    return await todoService.updateTodoService(params.id, body);
+};

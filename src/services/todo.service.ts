@@ -48,3 +48,19 @@ export const findTodoByIdService = async (id: number): Promise<ApiResponse<Todo 
         };
     }
 };
+
+export const updateTodoService = async (id: number, request: TodoForm): Promise<ApiResponse<Todo | null>> => {
+    try {
+        const { title, content } = request;
+        const result = await todoRepository.updateTodo(id, title, content);
+        return {
+            status: true,
+            data: result,
+        };
+    } catch (error) {
+        return {
+            status: false,
+            error: error as string,
+        };
+    }
+};

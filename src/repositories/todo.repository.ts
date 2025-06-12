@@ -26,3 +26,8 @@ export const findTodoById = async (id: number): Promise<Todo | null> => {
     const result = await db.select().from(todos).where(eq(todos.id, id));
     return result[0] ?? null;
 };
+
+export const updateTodo = async (id: number, title: string, content: string): Promise<Todo | null> => {
+    await db.update(todos).set({ title, content }).where(eq(todos.id, id));
+    return findTodoById(id);
+};

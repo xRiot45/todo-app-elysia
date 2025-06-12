@@ -1,5 +1,10 @@
 import Elysia from 'elysia';
-import { createTodoController, findAllTodosController, findTodoByIdController } from '../controllers/todo.controller';
+import {
+    createTodoController,
+    findAllTodosController,
+    findTodoByIdController,
+    updateTodoController,
+} from '../controllers/todo.controller';
 import { todoParamsValidation, todoValidation } from '../validations/todo.validation';
 
 export const todoRoutes = new Elysia({ prefix: '/todos' })
@@ -74,6 +79,35 @@ export const todoRoutes = new Elysia({ prefix: '/todos' })
             responses: {
                 200: {
                     description: 'Todo berhasil ditemukan',
+                    content: {
+                        'application/json': {
+                            example: {
+                                status: true,
+                                data: {
+                                    id: 1,
+                                    title: 'Belajar Elysia',
+                                    content: 'Mencoba membuat todo API',
+                                },
+                            },
+                        },
+                    },
+                },
+                404: {
+                    description: 'Todo tidak ditemukan',
+                },
+            },
+        },
+    })
+    .put('/:id', updateTodoController, {
+        params: todoParamsValidation,
+        body: todoValidation,
+        detail: {
+            summary: 'Update todo by id',
+            description: 'Memperbarui todo berdasarkan id',
+            tags: ['Todo'],
+            responses: {
+                200: {
+                    description: 'Todo berhasil diperbarui',
                     content: {
                         'application/json': {
                             example: {
